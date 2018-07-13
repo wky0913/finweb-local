@@ -2,6 +2,7 @@
 import pandas as pd
 import os
 
+from jqdatasdk import *
 from data_loader import DataLoaderSingleCode
 from config import CODES
 

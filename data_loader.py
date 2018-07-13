@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import pandas as pd
 
-
+from jqdatasdk import *
 from operator import mod
 
 WORDS = ['price','pe','pb','pee','pbe','pem','pbm']
@@ -88,7 +88,7 @@ class DataLoaderSingleCode(object):
     def __init__(self, code, dates):
         s_date = get_all_securities(['index']).ix[code].start_date
         self.code = code
-        self.dates = dates[dates>s_date]
+        self.dates = dates[dates>s_date.date()]
 
     def get_pes(self):
         tmp = []

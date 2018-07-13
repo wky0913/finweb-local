@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+from jqdatasdk import *
 from data_loader import DataLoader
 from data_ploter import TdFigPloter
 from data_ploter import GzFigPloter
@@ -19,7 +20,6 @@ class Evaluator(object):
 
 
 def main():
-    
     f_op = FileOperator(FILEN)
     dic = f_op.read_file()
     if not dic:

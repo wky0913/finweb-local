@@ -1,7 +1,10 @@
 # -*- coding:utf-8 -*-
+import matplotlib
+matplotlib.use('Agg')
 import pandas as pd
 import matplotlib.pyplot as plt
 
+from jqdatasdk import *
 
 class Ploter(object):
     def __init__(self, dic, code, dates, date, fig_type, method='pee'):
@@ -35,6 +38,7 @@ class Ploter(object):
             plt.plot(d['data'].index, d['data'], label=d['label'])
         plt.legend()
         plt.grid(True)
+        plt.savefig('../' + fig_data['name'] + fig_data['desc'])
         plt.show()
 
 
