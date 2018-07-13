@@ -1,9 +1,6 @@
-import numpy as np
-import pandas as pd
-import bisect
+# -*- coding:utf-8 -*-
 import jqdata
 import datetime
-import os
 
 # 参数配置
 TODAY   = datetime.datetime.today()
