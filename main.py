@@ -1,12 +1,12 @@
 # -*- coding:utf-8 -*-
 from jqdatasdk import *
-from data_loader import DataLoader
-from data_ploter import TdFigPloter
-from data_ploter import GzFigPloter
-from file_operator import FileOperator
-from data_analyzer import DataAnalyzer
-from config import TODAY, YESTDAY, SDATE, EDATE
-from config import DATES, FILEN, CODES
+from data_loader.data_loader import DataLoader
+from data_ploter.data_ploter import TdFigPloter
+from data_ploter.data_ploter import GzFigPloter
+from file_operator.file_operator import FileOperator
+from data_analyzer.data_analyzer import DataAnalyzer
+from pub.config import TODAY, DATES, CODES
+from pub.config import F_PATH, F_NAME
 
 
 # 评价类：评价数据，给出结论
@@ -20,7 +20,7 @@ class Evaluator(object):
 
 
 def main():
-    f_op = FileOperator(FILEN)
+    f_op = FileOperator(F_PATH+F_NAME)
     dic = f_op.read_file()
     if not dic:
         dl = DataLoader(CODES, DATES[:])

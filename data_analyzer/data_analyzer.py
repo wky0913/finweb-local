@@ -3,7 +3,7 @@ import pandas as pd
 import bisect
 
 from jqdatasdk import *
-from data_loader import DataLoaderSingle
+from data_loader.data_loader import DataLoaderSingle
 
 #数据分析类：分析数据
 #输入参数：

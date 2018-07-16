@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 #import jqdata
+import os
 import datetime
 import numpy as np
 
@@ -10,13 +11,10 @@ TODAY   = datetime.datetime.today()
 YESTDAY = TODAY-datetime.timedelta(days=1)
 SDATE = '2018-07-01'
 EDATE = TODAY
-#DATES   = [date.strftime('%Y-%m-%d') for date in\
-#         jqdata.get_trade_days(SDATE, EDATE)]
-#DATES   = [date for date in jqdata.get_trade_days(SDATE, EDATE)]
-#DATES = jqdata.get_trade_days(SDATE, EDATE)
 auth('13811131769', '486194')
 DATES = np.array(get_trade_days(SDATE, EDATE))
-FILEN = u'指数估值缓存文件.xlsx'
+F_PATH = os.path.abspath('../cache')
+F_NAME = u'指数估值缓存文件.xlsx'
 CODES = [
             ######宽基指数######
             #'000016.XSHG',#上证50

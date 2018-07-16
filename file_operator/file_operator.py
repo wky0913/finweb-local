@@ -3,16 +3,16 @@ import pandas as pd
 import os
 
 from jqdatasdk import *
-from data_loader import DataLoaderSingleCode
-from config import CODES
+from data_loader.data_loader import DataLoaderSingleCode
+from pub.config import CODES
 
 class FileOperator(object):
-    def __init__(self,fileN,dic={}):
+    def __init__(self,file,dic={}):
         self.dic = dic
-        self.fileN = fileN
+        self.file = file
     def save_file(self, dic):
         try:
-            writer=pd.ExcelWriter(self.fileN)
+            writer=pd.ExcelWriter(self.file)
             for code in dic:
                 df=dic[code]
                 df.to_excel(writer,code)
@@ -24,13 +24,13 @@ class FileOperator(object):
 
     def read_file(self):
         try:
-            if not os.path.exists(self.fileN):
+            if not os.path.exists(self.file):
                 return {}
-            info=pd.read_excel(self.fileN,'info')
+            info=pd.read_excel(self.file,'info')
             dic={}
             for code in list(set(CODES+list(info.ix[:,'code']))):
                 if code in info['code'].values:
-                    dic[code]=pd.read_excel(self.fileN,code)
+                    dic[code]=pd.read_excel(self.file,code)
             dic['info'] = info
             return dic
         except FileNotFoundError:
