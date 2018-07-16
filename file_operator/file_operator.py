@@ -44,7 +44,7 @@ class FileOperator(object):
                 break
         old_dates = [d.date() for d in old_dates]
         new_dates=pd.Series(list(set(dates)-set(old_dates))).sort_index(ascending=True)
-        
+
         # 更新旧指数中的日期数据
         if not new_dates.empty:
             tmp={}

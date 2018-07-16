@@ -16,20 +16,20 @@ class Ploter(object):
         self.method = method
         df=self.dic[self.code]
         self.df = df[df.index.isin(self.dates)]
-    
+
     def get_fig_name(self):
         df = self.dic['info']
         return df[df['code']==self.code].display_name.iloc[0]
-    
+
     def get_fig_cal_cur_val(self):
         return self.df.ix[self.date.date(),self.method.upper()]
-    
+
     def get_fig_cal_price(self):
         cal_val = self.get_fig_cal_cur_val()
         cal_price = self.df['PRICE']*(cal_val/self.df[self.method.upper()])
-        
+
         return cal_price
-        
+
     def display_single(self, fig_data):
         plt.figure(figsize=(15,8))
         plt.title(fig_data['name']+fig_data['desc'])
@@ -68,9 +68,8 @@ class TdFigPloter(Ploter):
     def display(self):
         fig_data = self.assemble_fig_data()
         self.display_single(fig_data)
-    
 
-    
+
 class GzFigPloter(Ploter):
     def assemble_fig_data(self):
         data1 = {'data':self.df[self.method.upper()],
@@ -87,6 +86,4 @@ class GzFigPloter(Ploter):
 
     def display(self):
         fig_data = self.assemble_fig_data()
-        self.display_single(fig_data)    
-
-
+        self.display_single(fig_data)

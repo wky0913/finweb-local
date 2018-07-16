@@ -15,26 +15,26 @@ class DataLoaderSingle(object):
             df=pd.DataFrame()
         q=query(
             valuation.market_cap,valuation.pe_ratio,
-            valuation.pb_ratio,              
+            valuation.pb_ratio,
             ).filter(valuation.code.in_(stocks))
         df=get_fundamentals(q, date)
         df=df.fillna(0)
-        
+
         self.stocks = get_index_stocks(code, date)
         self.df = df
         self.dfn = len(stocks)
         self.code = code
         self.date = date
-        
+
     def get_pe(self):
         if self.df.empty:
             return float('NaN')
         sum_p=sum(self.df.market_cap)
-        sum_e=sum(self.df.market_cap/self.df.pe_ratio)    
+        sum_e=sum(self.df.market_cap/self.df.pe_ratio)
         if sum_e > 0:
             pe=sum_p / sum_e
         else:
-            pe=float('NaN') 
+            pe=float('NaN')
         return pe
 
     def get_pb(self):
@@ -60,8 +60,8 @@ class DataLoaderSingle(object):
     def get_pem(self):
         if self.df.empty:
             return float('NaN')
-    
-        pes=list(self.df.pe_ratio);pes.sort()    
+
+        pes=list(self.df.pe_ratio);pes.sort()
         if mod(self.dfn,2)==0:
             pem=0.5*sum(pes[round(self.dfn/2-1):round(self.dfn/2+1)])
         else:
@@ -78,7 +78,7 @@ class DataLoaderSingle(object):
         else:
             pbm=pbs[round((self.dfn-1)/2)]
         return pbm
-    
+
     def get_index_price(self):
         price = get_price(self.code, end_date=self.date, count=1, frequency='1d', fields=['close'])
         return price.ix[0,'close']
@@ -143,12 +143,12 @@ class DataLoaderSingleCode(object):
             pems.append(dls.get_pem())
             pbms.append(dls.get_pbm())
             prices.append(dls.get_index_price())
-        df = pd.DataFrame(index=self.dates) 
+        df = pd.DataFrame(index=self.dates)
         for word in WORDS:
             df[word.upper()]=eval(word+'s')
         return df
 
-    
+
 class DataLoader(object):
     def __init__(self, codes, dates):
         self.codes = codes
