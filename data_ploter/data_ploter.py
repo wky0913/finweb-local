@@ -34,7 +34,6 @@ class Ploter(object):
         plt.figure(figsize=(15,8))
         plt.title(fig_data['name']+fig_data['desc'])
         for d in fig_data['data']:
-            #plt.plot(self.dates, d['data'], label=d['label'])
             plt.plot(d['data'].index, d['data'], label=d['label'])
         plt.legend()
         plt.grid(True)

@@ -22,22 +22,32 @@ class Evaluator(object):
 def main():
     f_op = FileOperator(F_PATH+F_NAME)
     dic = f_op.read_file()
-    if not dic:
-        dl = DataLoader(CODES, DATES[:])
-        dic = dl.get_index_dic()
-        f_op.save_file(dic)
-    else:
-        dic = f_op.flush_file(dic, DATES[:])
-        f_op.save_file(dic)
-    da = DataAnalyzer(dic, CODES, DATES[:], TODAY)
-    summary = da.get_summary()
 
-    for code in CODES:
-        tdp = TdFigPloter(dic, code, DATES[:], TODAY, 'fig_type', method='pee')
-        tdp.display()
-        gzp = GzFigPloter(dic, code, DATES[:], TODAY, 'fig_type', method='pee')
-        gzp.display()
-    return summary
+
+    info = dic['info']
+    df = dic[info.ix[0,0]]
+    df=df[df.index>DATES[0]]
+    df=df[df.index<DATES[-1]]
+
+
+
+
+    # if not dic:
+    #     dl = DataLoader(CODES, DATES)
+    #     dic = dl.get_index_dic()
+    #     f_op.save_file(dic)
+    # else:
+    #     dic = f_op.flush_file(dic, DATES)
+    #     f_op.save_file(dic)
+    # da = DataAnalyzer(dic, CODES, DATES, TODAY)
+    # summary = da.get_summary()
+    #
+    # for code in CODES:
+    #     tdp = TdFigPloter(dic, code, DATES, TODAY, 'fig_type', method='pee')
+    #     tdp.display()
+    #     gzp = GzFigPloter(dic, code, DATES, TODAY, 'fig_type', method='pee')
+    #     gzp.display()
+    # return summary
 
 
 main()

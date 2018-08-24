@@ -3,17 +3,39 @@
 import os
 import datetime
 import numpy as np
+import pandas as pd
 
 from jqdatasdk import *
 
+USE_LOCAL_DATA = True
+USE_ONLINE_DATA = not USE_LOCAL_DATA
 # 参数配置
 TODAY   = datetime.datetime.today()
 YESTDAY = TODAY-datetime.timedelta(days=1)
 SDATE = '2018-07-01'
 EDATE = TODAY
-auth('13811131769', '486194')
-DATES = np.array(get_trade_days(SDATE, EDATE))
-F_PATH = os.path.abspath('../cache')
+if USE_LOCAL_DATA:
+
+
+    DATES=pd.date_range(SDATE, EDATE)
+
+    # f_op = FileOperator(F_PATH+F_NAME)
+    # dic = f_op.read_file()
+    # info = dic['info']
+    # df = dic[info.ix[0,0]]
+    # print(df.index)
+
+
+
+    # __date = []
+    # for t in pd.date_range(SDATE, EDATE):
+    #     __date.append(t.strftime('%Y-%m-%d'))
+    # DATES = np.array(__date)
+    # DATES =
+else:
+    auth('13811131769', '486194')
+    DATES = np.array(get_trade_days(SDATE, EDATE))
+F_PATH = os.path.abspath('./')
 F_NAME = u'指数估值缓存文件.xlsx'
 CODES = [
             ######宽基指数######

@@ -19,7 +19,7 @@ class DataAnalyzerSingle(object):
         df = dic[code]
         self.dates = dates
         self.df = df[df.index.isin(dates)]
-        self.dls = DataLoaderSingle(code, date)
+        self.dls = DataLoaderSingle(code, date, dic)
 
     def cal_single(self,df,word):
         val_q=list(df.quantile([ii/10 for ii in range(11)]))
@@ -32,27 +32,27 @@ class DataAnalyzerSingle(object):
         return val_qt
 
     def get_pe_fwc(self):
-        df = self.df.ix[self.dates,'PE'];
+        df = self.df.ix[self.dates,'PE']
         return self.cal_single(df, 'pe')
 
     def get_pb_fwc(self):
-        df = self.df.ix[self.dates,'PB'];
+        df = self.df.ix[self.dates,'PB']
         return self.cal_single(df, 'pb')
 
     def get_pee_fwc(self):
-        df = self.df.ix[self.dates,'PEE'];
+        df = self.df.ix[self.dates,'PEE']
         return self.cal_single(df, 'pee')
 
     def get_pbe_fwc(self):
-        df = self.df.ix[self.dates,'PBE'];
+        df = self.df.ix[self.dates,'PBE']
         return self.cal_single(df, 'pbe')
 
     def get_pem_fwc(self):
-        df = self.df.ix[self.dates,'PEM'];
+        df = self.df.ix[self.dates,'PEM']
         return self.cal_single(df, 'pem')
 
     def get_pbm_fwc(self):
-        df = self.df.ix[self.dates,'PBM'];
+        df = self.df.ix[self.dates,'PBM']
         return self.cal_single(df, 'pbm')
 
 
@@ -87,9 +87,9 @@ class DataAnalyzer(object):
             all_index=get_all_securities(['index'])
             index_name=all_index.ix[code].display_name
 
-            df_summary.ix[code]=[index_name,\
-                '%.1f' % pe,'%.1f' % pe_qt,'%.1f' % pee,'%.1f' % pee_qt,\
-                '%.1f' % pem,'%.1f' % pem_qt,'%.1f' % pb,'%.1f' % pb_qt,\
+            df_summary.ix[code]=[index_name,
+                '%.1f' % pe,'%.1f' % pe_qt,'%.1f' % pee,'%.1f' % pee_qt,
+                '%.1f' % pem,'%.1f' % pem_qt,'%.1f' % pb,'%.1f' % pb_qt,
                 '%.1f' % pbe,'%.1f' % pbe_qt,'%.1f' % pbm,'%.1f' % pbm_qt]
 
         return df_summary

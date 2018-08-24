@@ -38,6 +38,7 @@ class FileOperator(object):
 
     def flush_file(self, dic, dates):
         # 获取要更新的日期
+        old_dates = []
         for code in dic:
             if code != 'info':
                 old_dates=dic[code].index
