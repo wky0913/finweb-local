@@ -37,7 +37,7 @@ class Ploter(object):
             plt.plot(d['data'].index, d['data'], label=d['label'])
         plt.legend()
         plt.grid(True)
-        plt.savefig('../' + fig_data['name'] + fig_data['desc'])
+        plt.savefig('./cache/' + fig_data['name'] + fig_data['desc'])
         plt.show()
 
 

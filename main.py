@@ -23,7 +23,6 @@ class Evaluator(object):
 
 def main():
     f_op = FileOperator(F_PATH+F_NAME)
-    print(F_PATH+F_NAME)
     dic = f_op.read_file()
 
 

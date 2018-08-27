@@ -10,8 +10,8 @@ from jqdatasdk import *
 USE_LOCAL_DATA = True
 USE_ONLINE_DATA = not USE_LOCAL_DATA
 # 参数配置
-# TODAY   = datetime.datetime.today()
-TODAY   = datetime.datetime(2018,7,18)
+TODAY   = datetime.datetime.today()
+# TODAY   = datetime.datetime(2018,7,18)
 YESTDAY = TODAY-datetime.timedelta(days=1)
 SDATE = '2018-07-01'
 EDATE = TODAY
@@ -20,7 +20,7 @@ if USE_LOCAL_DATA:
 else:
     auth('13811131769', '486194')
     DATES = np.array(get_trade_days(SDATE, EDATE))
-F_PATH = os.path.abspath('../')
+F_PATH = os.path.abspath('./cache/')
 F_NAME = u'/指数估值缓存文件.xlsx'
 CODES = [
             ######宽基指数######
