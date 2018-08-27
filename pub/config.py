@@ -10,37 +10,22 @@ from jqdatasdk import *
 USE_LOCAL_DATA = True
 USE_ONLINE_DATA = not USE_LOCAL_DATA
 # 参数配置
-TODAY   = datetime.datetime.today()
+# TODAY   = datetime.datetime.today()
+TODAY   = datetime.datetime(2018,7,18)
 YESTDAY = TODAY-datetime.timedelta(days=1)
 SDATE = '2018-07-01'
 EDATE = TODAY
 if USE_LOCAL_DATA:
-
-
     DATES=pd.date_range(SDATE, EDATE)
-
-    # f_op = FileOperator(F_PATH+F_NAME)
-    # dic = f_op.read_file()
-    # info = dic['info']
-    # df = dic[info.ix[0,0]]
-    # print(df.index)
-
-
-
-    # __date = []
-    # for t in pd.date_range(SDATE, EDATE):
-    #     __date.append(t.strftime('%Y-%m-%d'))
-    # DATES = np.array(__date)
-    # DATES =
 else:
     auth('13811131769', '486194')
     DATES = np.array(get_trade_days(SDATE, EDATE))
-F_PATH = os.path.abspath('./')
-F_NAME = u'指数估值缓存文件.xlsx'
+F_PATH = os.path.abspath('../')
+F_NAME = u'/指数估值缓存文件.xlsx'
 CODES = [
             ######宽基指数######
             #'000016.XSHG',#上证50
-            '000300.XSHG',#沪深300
+            #'000300.XSHG',#沪深300
             '000905.XSHG',#中证500
             #'000852.XSHG',#中证1000
             #'399006.XSHE',#创业板指

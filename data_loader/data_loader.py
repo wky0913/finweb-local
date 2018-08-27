@@ -39,7 +39,7 @@ class DataLoaderSingle(object):
         if self.df.empty:
             return float('NaN')
         if USE_LOCAL_DATA:
-            return self.df[self.date,'PE']
+            return self.df.ix[self.date.strftime('%Y-%m-%d'),'PE']
         else:
             sum_p=sum(self.df.market_cap)
             sum_e=sum(self.df.market_cap/self.df.pe_ratio)
@@ -53,7 +53,7 @@ class DataLoaderSingle(object):
         if self.df.empty:
             return float('NaN')
         if USE_LOCAL_DATA:
-            return self.df[self.date, 'PB']
+            return self.df.ix[self.date.strftime('%Y-%m-%d'), 'PB']
         else:
             sum_p=sum(self.df.market_cap)
             sum_b=sum(self.df.market_cap/self.df.pb_ratio)
@@ -64,7 +64,7 @@ class DataLoaderSingle(object):
         if self.df.empty:
             return float('NaN')
         if USE_LOCAL_DATA:
-            return self.df[self.date, 'PEE']
+            return self.df.ix[self.date.strftime('%Y-%m-%d'),'PEE']
         else:
             pee=len(self.df)/sum([1/p if p>0 else 0 for p in self.df.pe_ratio])
             return pee
@@ -73,7 +73,7 @@ class DataLoaderSingle(object):
         if self.df.empty:
             return float('NaN')
         if USE_LOCAL_DATA:
-            return self.df[self.date, 'PBE']
+            return self.df.ix[self.date.strftime('%Y-%m-%d'), 'PBE']
         else:
             pbe=len(self.df)/sum([1/b if b>0 else 0 for b in self.df.pb_ratio])
             return pbe
@@ -82,7 +82,7 @@ class DataLoaderSingle(object):
         if self.df.empty:
             return float('NaN')
         if USE_LOCAL_DATA:
-            return self.df[self.date, 'PEM']
+            return self.df.ix[self.date.strftime('%Y-%m-%d'), 'PEM']
         else:
             pes=list(self.df.pe_ratio);pes.sort()
             if mod(self.dfn,2)==0:
@@ -95,7 +95,7 @@ class DataLoaderSingle(object):
         if self.df.empty:
             return float('NaN')
         if USE_LOCAL_DATA:
-            return self.df[self.date, 'PBM']
+            return self.df.ix[self.date.strftime('%Y-%m-%d'), 'PBM']
         else:
             pbs=list(self.df.pb_ratio);pbs.sort()
             if mod(self.dfn,2)==0:

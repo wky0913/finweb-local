@@ -3,6 +3,7 @@ import pandas as pd
 import bisect
 
 from jqdatasdk import *
+from pub.config import USE_LOCAL_DATA
 from data_loader.data_loader import DataLoaderSingle
 
 #数据分析类：分析数据
@@ -66,9 +67,9 @@ class DataAnalyzer(object):
     def get_summary(self):
         columns=[u'名称',u'加权PE',u'分位点%',u'等权PE',u'分位点%',u'中位数PE',u'分位点%',
          u'加权PB',u'分位点%',u'等权PB',u'分位点%',u'中位数PB',u'分位点%']
-        df_summary=pd.DataFrame(index=[code for code in self.codes],columns=columns)
+        df_summary = pd.DataFrame(index=[code for code in self.codes], columns=columns)
         for code in self.codes:
-            dls = DataLoaderSingle(code, self.date)
+            dls = DataLoaderSingle(code, self.date, dic=self.dic)
             pe = dls.get_pe()
             pb = dls.get_pb()
             pee = dls.get_pee()
@@ -84,8 +85,12 @@ class DataAnalyzer(object):
             pem_qt=das.get_pem_fwc()
             pbm_qt=das.get_pbm_fwc()
 
-            all_index=get_all_securities(['index'])
-            index_name=all_index.ix[code].display_name
+            if USE_LOCAL_DATA:
+                df = self.dic['info']
+                index_name = df[df.code == code].display_name
+            else:
+                all_index=get_all_securities(['index'])
+                index_name=all_index.ix[code].display_name
 
             df_summary.ix[code]=[index_name,
                 '%.1f' % pe,'%.1f' % pe_qt,'%.1f' % pee,'%.1f' % pee_qt,
